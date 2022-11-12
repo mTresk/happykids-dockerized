@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www:delegated
+      - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+    labels:
+      - "traefik.http.routers.nginx.rule=Host(`happykids.djtresk.ru`)"
+      - "traefik.port=80"
+      - "traefik.docker.network=web"
+      - "traefik.http.routers.nginx.entrypoints=websecure"
+      - "traefik.http.routers.nginx.tls.certresolver=myresolver"
+    depends_on:
+      - app
+    container_name: happykids_nginx
+    networks:
+      - web
+      - internal
+
+  app:
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www:delegated
+      - ./_docker/php/conf.d/php.ini:/usr/local/etc/php/conf.d/php.ini
+    depends_on:
+      - db
+    container_name: happykids_app
+    networks:
+      - web
+
+  db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - ./storage/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: happykids
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - "3306:3306"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: happykids_db
+    networks:
+      - internal
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false

@@ -1,0 +1,103 @@
+//<FORM>
+// Снипет (HTML):
+
+.form {
+	// .form__title
+	&__title {
+		margin-bottom: rem(20);
+		line-height: 125% !important;
+	}
+	// .form__description
+	&__description {
+		margin-bottom: rem(40);
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 125%;
+		text-align: center;
+	}
+	// .form__input
+	&__input {
+		position: relative;
+		width: 100%;
+		margin-bottom: rem(35);
+		input {
+			width: 100%;
+			background: #f9f9fb;
+			border: 1px solid #828282;
+			border-radius: 6px;
+			padding: rem(15);
+			outline-color: $accentColor;
+			font-weight: 400;
+			line-height: 125%;
+			color: #828282;
+			@include adaptiveValue('font-size', 20, 17);
+		}
+	}
+	// .form__btn
+	&__btn {
+		animation: none;
+		box-shadow: none;
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: rem(25);
+	}
+	// .form__accept
+	&__accept {
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 125%;
+		text-align: center;
+
+		a {
+			color: $accentColor;
+			transition: color 0.4s ease-in-out;
+
+			@media (any-hover: hover) {
+				&:hover {
+					color: $yellowDarkColor;
+				}
+			}
+		}
+	}
+	&__error {
+		position: absolute;
+		bottom: -18px;
+		font-size: rem(13);
+		font-weight: 500;
+		color: $accentColor;
+	}
+}
+
+//</FORM>
+
+// <BUTTONS>
+// Снипет (HTML): btn
+// @import "button";
+
+// <INPUTS>
+// Снипет (HTML): inp
+// @import "input";
+
+// <CHECK>
+// Снипет (HTML): chk
+// @import "checkbox";
+
+// <RADIO>
+// Снипет (HTML): opt
+// @import "radio";
+
+// <SELECT>
+// Снипет (HTML): sel
+// @import "select";
+
+// <RATING>
+// Снипет (HTML): rating
+// @import "rating";
+
+// <QUANTITY>
+// Снипет (HTML): qa
+// @import "quantity";
+
+// <RANGE>
+// Снипет (HTML):
+// @import "range";

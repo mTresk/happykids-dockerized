@@ -1,0 +1,227 @@
+// Заголовки, общие БЄМ блоки и проче...
+.pt {
+    @include adaptiveValue('padding-top', 130, 60);
+}
+
+.pb {
+    @include adaptiveValue('padding-bottom', 130, 60);
+}
+
+.pt-s {
+    @include adaptiveValue('padding-top', 80, 40);
+}
+
+.pb-s {
+    @include adaptiveValue('padding-bottom', 80, 40);
+}
+
+.title {
+    max-width: rem(1100);
+    font-weight: 500;
+    line-height: 125%;
+    text-align: center;
+
+    @include adaptiveValue('font-size', 36, 22);
+}
+
+//========================================================================================================================================================
+.policy {
+    @media (max-width: $tablet) {
+        margin-top: rem(60);
+    }
+    // .policy__body
+    &__body {
+        p {
+            @include adaptiveValue('font-size', 16, 14);
+            margin: 0px 0px rem(15) 0px;
+            line-height: 145%;
+        }
+
+        a {
+            color: $accentColor;
+            transition: color 0.3s ease-in-out;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    color: $yellowDarkColor;
+                }
+            }
+        }
+    }
+
+    &__title {
+        margin: 0 auto;
+
+        @include adaptiveValue('margin-bottom', 80, 40);
+    }
+}
+
+//========================================================================================================================================================
+.not-found {
+    // .not-found__body
+    &__body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+    }
+
+    // .not-found__title
+    &__title {
+        font-weight: bold;
+        line-height: 1.17;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+        color: $accentColor;
+
+        @include adaptiveValue('font-size', 300, 100);
+    }
+
+    // .not-found__text
+    &__text {
+        font-weight: bold;
+        line-height: 1.17;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+
+        @include adaptiveValue('font-size', 30, 16);
+    }
+}
+
+//========================================================================================================================================================
+.preloader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    background: #f9f9fb;
+
+    &__row {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        width: rem(70);
+        height: rem(70);
+        margin-top: rem(-35);
+        margin-left: rem(-35);
+        text-align: center;
+        animation: preloader-rotate 2s infinite linear;
+    }
+
+    &__item {
+        position: absolute;
+        top: 0;
+        display: inline-block;
+        width: rem(35);
+        height: rem(35);
+        background-color: $accentColor;
+        border-radius: 100%;
+        animation: preloader-bounce 2s infinite ease-in-out;
+
+        &:last-child {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1s;
+        }
+    }
+}
+
+@keyframes preloader-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes preloader-bounce {
+    0%,
+    100% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+}
+
+.loaded_hiding .preloader {
+    opacity: 0;
+    transition: 1s opacity;
+}
+
+.loaded .preloader {
+    display: none;
+}
+
+//========================================================================================================================================================
+._fade-down {
+    transform: translateY(rem(50)) !important;
+    opacity: 0 !important;
+    transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1) !important;
+}
+
+._watcher-view {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+}
+
+//========================================================================================================================================================
+// Кнопка наверх
+
+.topbutton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    color: $whiteColor;
+    text-align: center;
+    cursor: pointer;
+    background-color: $accentColor;
+    transition: all 0.4s ease-in-out;
+    transform: translateX(120px);
+    border-radius: rem(6);
+
+    ._icon-up {
+        &::before {
+            position: absolute;
+            top: 16px;
+            left: 18px;
+            display: inline-block;
+            padding: 6px;
+            content: '';
+            border: solid $whiteColor;
+            border-width: 0 3px 3px 0;
+            transform: rotate(-135deg);
+        }
+
+        span {
+            &::before {
+                position: absolute;
+                top: 27px;
+                left: 18px;
+                display: inline-block;
+                padding: 6px;
+                content: '';
+                border: solid $whiteColor;
+                border-width: 0 3px 3px 0;
+                transform: rotate(-135deg);
+            }
+        }
+    }
+
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: $yellowDarkColor;
+        }
+    }
+
+    &._active {
+        transform: translateX(0);
+    }
+}
